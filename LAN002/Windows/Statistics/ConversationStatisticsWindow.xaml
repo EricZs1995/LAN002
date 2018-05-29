@@ -1,0 +1,37 @@
+﻿<Window x:Class="LAN002.Windows.Statistics.ConversationStatisticsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LAN002.Windows.Statistics"
+        xmlns:c1="http://schemas.componentone.com/winfx/2006/xaml"
+        mc:Ignorable="d" Closing="Window_Closing" Closed="Window_Closed" Icon="/1.ico" 
+        Title="局域网数据检测与分析系统 · 对话" Height="450" Width="800">
+    <DockPanel>
+        <TabControl Name="conversationStatTab"  DockPanel.Dock="Top" SelectionChanged="TabControl_SelectionChanged">
+            <TabItem Header="Ethernet"></TabItem>
+            <TabItem Header="IPv4"></TabItem>
+            <TabItem Header="IPv6"></TabItem>
+            <TabItem Header="TCP"></TabItem>
+            <TabItem Header="UDP"></TabItem>
+        </TabControl>
+        <c1:C1DataGrid Name="conversationStatList" 
+                               BorderBrush="Transparent" 
+                               HeaderBackground="AliceBlue" 
+                               Padding="2"
+                               CanUserFreezeColumns="None"
+                               CanUserAddRows="False"
+                               CanUserEditRows="False"
+                               AutoGenerateColumns="True"
+                               SelectionMode="SingleRow"
+                               ColumnHeaderClickAction="Sort"
+                               GridLinesVisibility="All"
+                               RowHeight="25"
+                               AlternatingRowBackground="White"
+                               >
+            <c1:C1RowIndexHeaderBehavior.RowIndexHeaderBehavior>
+                <c1:C1RowIndexHeaderBehavior InitialIndex="1"/>
+            </c1:C1RowIndexHeaderBehavior.RowIndexHeaderBehavior>
+        </c1:C1DataGrid>
+    </DockPanel>
+</Window>

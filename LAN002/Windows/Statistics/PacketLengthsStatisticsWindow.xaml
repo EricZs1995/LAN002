@@ -1,0 +1,215 @@
+﻿<Window x:Class="LAN002.Windows.Statistics.PacketLengthsStatisticsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LAN002.Windows.Statistics"
+        xmlns:model="clr-namespace:LAN002.Windows.ViewModel"
+        xmlns:converters="clr-namespace:LAN002"
+        xmlns:TreeView="clr-namespace:Seekford.Controls.WPFTreeListView;assembly=Seekford.Controls.WPFTreeListView"
+        mc:Ignorable="d" Closed="Window_Closed" Icon="/1.ico"
+        Title="局域网数据检测与分析系统 · 数据包长度" Height="450" Width="800">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Seekford.Controls.WPFTreeListView;component/Resources/WPFTreeResource.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <!--<Window.DataContext>
+        <model:PacketLengthsStatisticsTreeViewModel/>
+    </Window.DataContext>-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <!--<StackPanel Orientation="Horizontal">
+            <TextBlock Text="How many Nodes to create?"/>
+            <ComboBox Margin="10,0,10,0" ItemsSource="{Binding ValidAmounts}" SelectedItem="{Binding AmountToGenerate}"/>            
+            <TextBlock Text="Filter:"/>
+            <TextBox Margin="10,0,10,0" Text="{Binding FilterString,Mode=TwoWay,UpdateSourceTrigger=LostFocus}" Width="200"/>
+            <Button Content="Apply"/>-->
+        <!-- Here just as something to handle the lost focus. If you use the PropertyChanged Trigger instead of lost focus, you will need to code for pushing focus back to the box since the tree will steal it on a refresh.-->
+        <!--
+        </StackPanel>-->
+        <TreeView:TreeListView Name="MySampleTree" Grid.Row="1"
+                                    Margin="2"                                    
+                                    AlternationCount="2"
+                               FontFamily="Consolas"
+                                    AutoExpand="True"                                    
+                                    Filter="{Binding }"
+                                    KeyboardNavigation.TabNavigation="Cycle"
+                                    ModelSource="{Binding TreeListModel,Mode=OneWay}"
+                                    NoRowsDefaultMessage="{Binding NoRowsDefaultMessage}"
+                                    SelectedItem="{Binding SelectedNode,  Mode=TwoWay}"
+                                    SetFocus="True"
+                                    TextOptions.TextFormattingMode="Display"
+                                    TextOptions.TextRenderingMode="ClearType"
+                                    UseTreeNodeContext="True">
+            <TreeView:TreeListView.Resources>
+                <Style TargetType="{x:Type TreeView:TreeListViewItem}" >
+                    <Style.Triggers>
+                        <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                            <Setter Property="Background" Value="WhiteSmoke">
+
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TreeView:TreeListView.Resources>
+            <TreeView:TreeListView.View>
+                <GridView ColumnHeaderContextMenu="{DynamicResource GridViewColumnHeaderContextMenu}">
+                    <GridView.Columns>
+
+                        <GridViewColumn 
+                                            TreeView:TreeListView.StateKey="PrimaryColumn">
+                            <GridViewColumn.HeaderContainerStyle>
+                                <Style BasedOn="{StaticResource {x:Type GridViewColumnHeader}}" TargetType="{x:Type GridViewColumnHeader}">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                </Style>
+                            </GridViewColumn.HeaderContainerStyle>
+                            <GridViewColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="Topic/Item"/>
+                                </DataTemplate>
+                            </GridViewColumn.HeaderTemplate>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid DataContext="{Binding TreeModel}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <TreeView:RowExpander Grid.Column="0" />
+                                        <Label Grid.Column="2" Content="{Binding DisplayName}" Focusable="True" IsTabStop="True"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Count"
+                                            TreeView:TreeListView.MinColWidth="30"
+                                            TreeView:TreeListView.StateKey="Count">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <!-- This column has specific UI element for our different object types
+                                    So, to aid in this and avoid binding issues and allow for a more efficient data display
+                                    we use our data type control selector. This is an optimized template selector.
+                                    Put in the different datatemplates.
+                                    
+                                    If you use base classes, use the more specific classes template first. The template selector will
+                                    look to see if the class is a subclass and will use the first matching template. Order is important.
+                                    If no match is found, then the template is null. Which is fine.
+                                    -->
+                                    <TreeView:DataTypeControlSelector>
+                                        <!--<DataTemplate DataType="{x:Type model:ProtocalStatisticsTreeModel}">
+                                            -->
+                                        <!-- This is an example of a control we made to allow you to do in-place editing in your row.
+                                            Just put in the content you want to show in the grid in the inactivecontent property.
+                                            Set the ActiveContent to what you want to show when a user hovers or clicks the cell.
+                                            We setup a simple date example here. Combo boxes and check boxes are also very common.     
+                                            
+                                            If you just want them to edit all the time, simple set your datatemplate to the editor you want.
+                                            The CellEditor is if you want the grid to look one way when not editing, and another when editing.
+                                            -->
+                                        <!--
+                                            <TreeView:CellEditor>
+                                                <TreeView:CellEditor.ActiveContent>
+                                                    <DataTemplate>
+                                                        <DatePicker SelectedDate="{Binding TreeModel.PacketPercent,Mode=TwoWay}"/>
+                                                    </DataTemplate>
+                                                </TreeView:CellEditor.ActiveContent>
+                                                <TreeView:CellEditor.InactiveContent>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding TreeModel.PacketPercent,Converter={x:Static converters:DateToTextConverter.Instance},ConverterParameter=d}"/>
+                                                    </DataTemplate>
+                                                </TreeView:CellEditor.InactiveContent>
+                                            </TreeView:CellEditor>
+                                        </DataTemplate>-->
+
+                                        <DataTemplate DataType="{x:Type model:PacketLengthsStatisticsTreeModel}">
+                                            <TextBlock Text="{Binding TreeModel.Count}"/>
+                                        </DataTemplate>
+                                    </TreeView:DataTypeControlSelector>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Average"
+                                            TreeView:TreeListView.StateKey="Average">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <!-- This column has specific UI element for our different object types
+                                    So, to aid in this and avoid binding issues and allow for a more efficient data display
+                                    we use our data type control selector. This is an optimized template selector.
+                                    Put in the different datatemplates.
+                                    
+                                    If you use base classes, use the more specific classes template first. The template selector will
+                                    look to see if the class is a subclass and will use the first matching template. Order is important.
+                                    If no match is found, then the template is null. Which is fine.                                    
+                                    -->
+                                    <!-- Position is only pertinent to the employeetreemodel so, that is the only one we template-->
+
+                                    <TreeView:DataTypeControlSelector>
+                                        <DataTemplate DataType="{x:Type model:PacketLengthsStatisticsTreeModel}">
+                                            <TextBlock Text="{Binding TreeModel.Average}"/>
+                                        </DataTemplate>
+                                    </TreeView:DataTypeControlSelector>
+
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Min Val"
+                                            TreeView:TreeListView.StateKey="MinVal">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TreeView:DataTypeControlSelector>
+                                        <DataTemplate DataType="{x:Type model:PacketLengthsStatisticsTreeModel}">
+                                            <TextBlock Text="{Binding TreeModel.MinVal}"/>
+                                        </DataTemplate>
+                                    </TreeView:DataTypeControlSelector>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Max Val"
+                                            TreeView:TreeListView.StateKey="MaxVal">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TreeView:DataTypeControlSelector>
+                                        <DataTemplate DataType="{x:Type model:PacketLengthsStatisticsTreeModel}">
+                                            <TextBlock Text="{Binding TreeModel.MaxVal}"/>
+                                        </DataTemplate>
+                                    </TreeView:DataTypeControlSelector>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Rate(ms)"
+                                            TreeView:TreeListView.StateKey="Rate">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TreeView:DataTypeControlSelector>
+                                        <DataTemplate DataType="{x:Type model:PacketLengthsStatisticsTreeModel}">
+                                            <TextBlock Text="{Binding TreeModel.Rate}"/>
+                                        </DataTemplate>
+                                    </TreeView:DataTypeControlSelector>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Percent"
+                                            TreeView:TreeListView.StateKey="Percent">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TreeView:DataTypeControlSelector>
+                                        <DataTemplate DataType="{x:Type model:PacketLengthsStatisticsTreeModel}">
+                                            <TextBlock Text="{Binding TreeModel.Percent}"/>
+                                        </DataTemplate>
+                                    </TreeView:DataTypeControlSelector>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView.Columns>
+                </GridView>
+            </TreeView:TreeListView.View>
+        </TreeView:TreeListView>
+    </Grid>
+</Window>

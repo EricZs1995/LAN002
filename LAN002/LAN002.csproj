@@ -1,0 +1,578 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <SSDTUnitTestPath Condition="'$(SSDTUnitTestPath)' == ''">$(VsInstallRoot)\Common7\IDE\Extensions\Microsoft\SQLDB</SSDTUnitTestPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SSDTPath Condition="'$(SSDTPath)' == ''">$(VsInstallRoot)\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\130</SSDTPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>1.ico</ApplicationIcon>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CA7AFA4F-916D-4181-BAF5-7CBDA83B876F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>LAN002</RootNamespace>
+    <AssemblyName>LAN002</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AbMath">
+      <HintPath>..\..\..\..\Pcap\netstandard2.0\AbMath.dll</HintPath>
+    </Reference>
+    <Reference Include="C1.WPF.4, Version=4.0.20181.587, Culture=neutral, PublicKeyToken=2aa4ec5576d6c3ce, processorArchitecture=MSIL" />
+    <Reference Include="C1.WPF.DataGrid.4, Version=4.0.20181.587, Culture=neutral, PublicKeyToken=2aa4ec5576d6c3ce, processorArchitecture=MSIL" />
+    <Reference Include="C1.WPF.DateTimeEditors.4, Version=4.0.20181.587, Culture=neutral, PublicKeyToken=2aa4ec5576d6c3ce, processorArchitecture=MSIL" />
+    <Reference Include="DynamicDataDisplay">
+      <HintPath>..\..\..\..\Pcap\demo\CorrelationDimensionCalculator-master\packages\DynamicDataDisplay.0.3.0.1\lib\net45\DynamicDataDisplay.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.5.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.5.1\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.JScript" />
+    <Reference Include="PacketDotNet, Version=0.16.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Pcap\packetdotnet.0.16.0\lib\PacketDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Seekford.Controls.WPFTreeListView, Version=2016.1.7.2490, Culture=neutral, PublicKeyToken=f03908037544885e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Seekford.Controls.WPFTreeListView.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Common, Version=5.0.0.0, Culture=neutral, PublicKeyToken=02c12cbda47e6587, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.Common.5.1.0\lib\net45\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=02c12cbda47e6587, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.Interfaces.5.1.0\lib\net45\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.OrmLite, Version=5.0.0.0, Culture=neutral, PublicKeyToken=02c12cbda47e6587, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.OrmLite.5.1.0\lib\net45\ServiceStack.OrmLite.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.OrmLite.SqlServer, Version=5.0.0.0, Culture=neutral, PublicKeyToken=02c12cbda47e6587, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.OrmLite.SqlServer.5.1.0\lib\net45\ServiceStack.OrmLite.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text, Version=5.0.0.0, Culture=neutral, PublicKeyToken=02c12cbda47e6587, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.Text.5.1.0\lib\net45\ServiceStack.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpPcap, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Pcap\SharpPcap-4.3.0\Release\SharpPcap.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SqlClient, Version=4.2.0.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SqlClient.4.4.2\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Compact.4.0.8876.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="DAL\DB.cs" />
+    <Compile Include="DAL\Estimation\ArmaEngine.cs" />
+    <Compile Include="DAL\Estimation\EstimationResult.cs" />
+    <Compile Include="DAL\Estimation\Estimator.cs" />
+    <Compile Include="DAL\Estimation\IEstimationEngine.cs" />
+    <Compile Include="DAL\Estimation\NeuronNetworkEngine.cs" />
+    <Compile Include="DAL\Estimation\TrendEngine.cs" />
+    <Compile Include="DAL\Estimation\WeightedMeanEngine.cs" />
+    <Compile Include="DAL\IDBHelper.cs" />
+    <Compile Include="DAL\LoognDBHelper.cs" />
+    <Compile Include="DAL\ServiceStackDBHelper.cs" />
+    <Compile Include="DTO\AdapterInfo.cs" />
+    <Compile Include="DTO\AttackLog.cs" />
+    <Compile Include="DTO\BlackList.cs" />
+    <Compile Include="DTO\CaptureLog.cs" />
+    <Compile Include="DTO\DeviceInfo.cs" />
+    <Compile Include="DTO\ConvStatMacORIpResult.cs" />
+    <Compile Include="DTO\ConvStatTranResult.cs" />
+    <Compile Include="DTO\Globals.cs" />
+    <Compile Include="DTO\IDateValue.cs" />
+    <Compile Include="DTO\PacketInfo.cs" />
+    <Compile Include="DTO\PacketStatByLength.cs" />
+    <Compile Include="DTO\PointStatMacORIpResult.cs" />
+    <Compile Include="DTO\PointStatTranResult.cs" />
+    <Compile Include="DTO\ProtocalStatByLayer.cs" />
+    <Compile Include="DTO\Protocal\ArpExtract.cs" />
+    <Compile Include="DTO\Protocal\EthernetExtract.cs" />
+    <Compile Include="DTO\Protocal\FrameExtract.cs" />
+    <Compile Include="DTO\Protocal\IcmpExtract.cs" />
+    <Compile Include="DTO\Protocal\IgmpExtract.cs" />
+    <Compile Include="DTO\Protocal\IPExtract.cs" />
+    <Compile Include="DTO\Protocal\TcpExtract.cs" />
+    <Compile Include="DTO\Protocal\UdpExtract.cs" />
+    <Compile Include="DTO\RealChartItem.cs" />
+    <Compile Include="DTO\RealTimeInfo.cs" />
+    <Compile Include="DTO\StatisticsInfo.cs" />
+    <Compile Include="Service\DevicesService.cs" />
+    <Compile Include="Windows\Init\AdapterInitWindow.xaml.cs">
+      <DependentUpon>AdapterInitWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Init\FilterSettingWindow.xaml.cs">
+      <DependentUpon>FilterSettingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\LogManager\AttackLogWindow.xaml.cs">
+      <DependentUpon>AttackLogWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\LogManager\CaptureLogWindow.xaml.cs">
+      <DependentUpon>CaptureLogWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Statistics\ConversationStatisticsWindow.xaml.cs">
+      <DependentUpon>ConversationStatisticsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Statistics\EndpointsStatisticsWindow.xaml.cs">
+      <DependentUpon>EndpointsStatisticsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Statistics\IOChartStatisticsWindow.xaml.cs">
+      <DependentUpon>IOChartStatisticsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Statistics\PacketLengthsStatisticsWindow.xaml.cs">
+      <DependentUpon>PacketLengthsStatisticsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Statistics\ProtocalStatisticsWindow.xaml.cs">
+      <DependentUpon>ProtocalStatisticsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Statistics\RealTimeWindow.xaml.cs">
+      <DependentUpon>RealTimeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ViewModel\PacketLengthsStatisticsTreeModel.cs" />
+    <Compile Include="Windows\ViewModel\PacketLengthsStatisticsTreeViewModel.cs" />
+    <Compile Include="Windows\ViewModel\ProtocalStatisticsTreeModel.cs" />
+    <Compile Include="Windows\ViewModel\ProtocalStatisticsTreeViewModel.cs" />
+    <Page Include="DeviceChoose.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DeviceChoose.xaml.cs">
+      <DependentUpon>DeviceChoose.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\PacketCompInfo.cs" />
+    <Compile Include="DTO\PacketSimpInfo.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Windows\Init\AdapterInitWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Init\FilterSettingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\LogManager\AttackLogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\LogManager\CaptureLogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Statistics\ConversationStatisticsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Statistics\EndpointsStatisticsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Statistics\IOChartStatisticsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Statistics\PacketLengthsStatisticsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Statistics\ProtocalStatisticsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Statistics\RealTimeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Image\stock_icons\svg-to-png.sh" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\delete_list.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\delete_list%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\capture_comment_disabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\capture_comment_update.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\wireshark.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\wiresharkcapture.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\x-capture-options%402x.png" />
+    <Resource Include="Image\x-capture-options.png" />
+    <Resource Include="Image\x-capture-restart%402x.png" />
+    <Resource Include="Image\x-capture-restart.png" />
+    <Resource Include="Image\x-capture-start%402x.png" />
+    <Resource Include="Image\x-capture-start.on%402x.png" />
+    <Resource Include="Image\x-capture-start.on.png" />
+    <Resource Include="Image\x-capture-start.png" />
+    <Resource Include="Image\x-capture-stop%402x.png" />
+    <Resource Include="Image\x-capture-stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\x-capture-file-close%402x.png" />
+    <Resource Include="Image\x-capture-file-close.png" />
+    <Resource Include="Image\x-capture-file-reload%402x.png" />
+    <Resource Include="Image\x-capture-file-reload.png" />
+    <Resource Include="Image\x-capture-file-save%402x.png" />
+    <Resource Include="Image\x-capture-file-save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\zoom-in%402x.png" />
+    <Resource Include="Image\zoom-in.png" />
+    <Resource Include="Image\zoom-original%402x.png" />
+    <Resource Include="Image\zoom-original.png" />
+    <Resource Include="Image\zoom-out%402x.png" />
+    <Resource Include="Image\zoom-out.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\timg3.jpg" />
+    <Resource Include="Image\wsicon1024.png" />
+    <Resource Include="Image\timg.jpg" />
+    <Resource Include="Image\stock_icons\14x14\x-capture-comment-update%402x.png" />
+    <Resource Include="Image\stock_icons\14x14\x-capture-comment-update.png" />
+    <Content Include="DAL\Sql\PacketByLength.sql" />
+    <Content Include="DAL\Sql\ConvByIpUdp.sql" />
+    <Content Include="DAL\Sql\ConvByIpv4.sql" />
+    <Content Include="DAL\Sql\ConvByIpTcp.sql" />
+    <Content Include="DAL\Sql\ConvByIpv6.sql" />
+    <Content Include="DAL\Sql\ConvByMac.sql" />
+    <Content Include="DAL\Sql\ProtocalByLayer.sql" />
+    <Content Include="DAL\Sql\dropTable.sql" />
+    <Content Include="DAL\Sql\EPointByIpUdp.sql" />
+    <Content Include="DAL\Sql\EPointByIpv6.sql" />
+    <Content Include="DAL\Sql\groupbyscond.sql" />
+    <Content Include="DAL\Sql\EPointByIpv4.sql" />
+    <Content Include="DAL\Sql\EPointByIpTcp.sql" />
+    <Content Include="DAL\Sql\EPointByMac.sql" />
+    <Resource Include="Image\cancel2.png" />
+    <Content Include="Image\stock_icons\14x14\x-capture-comment-update.svg" />
+    <Resource Include="Image\stock_icons\14x14\x-capture-filter-bookmark%402x.png" />
+    <Resource Include="Image\stock_icons\14x14\x-capture-filter-bookmark.active%402x.png" />
+    <Resource Include="Image\stock_icons\14x14\x-capture-filter-bookmark.active.png" />
+    <Content Include="Image\stock_icons\14x14\x-capture-filter-bookmark.active.svg" />
+    <Resource Include="Image\stock_icons\14x14\x-capture-filter-bookmark.png" />
+    <Resource Include="Image\stock_icons\14x14\x-capture-filter-bookmark.selected%402x.png" />
+    <Resource Include="Image\stock_icons\14x14\x-capture-filter-bookmark.selected.png" />
+    <Content Include="Image\stock_icons\14x14\x-capture-filter-bookmark.selected.svg" />
+    <Content Include="Image\stock_icons\14x14\x-capture-filter-bookmark.svg" />
+    <Resource Include="Image\stock_icons\14x14\x-display-filter-bookmark%402x.png" />
+    <Resource Include="Image\stock_icons\14x14\x-display-filter-bookmark.active%402x.png" />
+    <Resource Include="Image\stock_icons\14x14\x-display-filter-bookmark.active.png" />
+    <Content Include="Image\stock_icons\14x14\x-display-filter-bookmark.active.svg" />
+    <Resource Include="Image\stock_icons\14x14\x-display-filter-bookmark.png" />
+    <Resource Include="Image\stock_icons\14x14\x-display-filter-bookmark.selected%402x.png" />
+    <Resource Include="Image\stock_icons\14x14\x-display-filter-bookmark.selected.png" />
+    <Content Include="Image\stock_icons\14x14\x-display-filter-bookmark.selected.svg" />
+    <Content Include="Image\stock_icons\14x14\x-display-filter-bookmark.svg" />
+    <Resource Include="Image\stock_icons\14x14\x-expert-chat%402x.png" />
+    <Resource Include="Image\stock_icons\14x14\x-expert-chat.png" />
+    <Resource Include="Image\stock_icons\14x14\x-expert-error%402x.png" />
+    <Resource Include="Image\stock_icons\14x14\x-expert-error.png" />
+    <Content Include="Image\stock_icons\14x14\x-expert-indicators-all.svg" />
+    <Resource Include="Image\stock_icons\14x14\x-expert-none%402x.png" />
+    <Resource Include="Image\stock_icons\14x14\x-expert-none.png" />
+    <Resource Include="Image\stock_icons\14x14\x-expert-note%402x.png" />
+    <Resource Include="Image\stock_icons\14x14\x-expert-note.png" />
+    <Resource Include="Image\stock_icons\14x14\x-expert-warn%402x.png" />
+    <Resource Include="Image\stock_icons\14x14\x-expert-warn.png" />
+    <Resource Include="Image\stock_icons\14x14\x-filter-clear%402x.png" />
+    <Resource Include="Image\stock_icons\14x14\x-filter-clear.active%402x.png" />
+    <Resource Include="Image\stock_icons\14x14\x-filter-clear.active.png" />
+    <Content Include="Image\stock_icons\14x14\x-filter-clear.active.svg" />
+    <Resource Include="Image\stock_icons\14x14\x-filter-clear.png" />
+    <Resource Include="Image\stock_icons\14x14\x-filter-clear.selected%402x.png" />
+    <Resource Include="Image\stock_icons\14x14\x-filter-clear.selected.png" />
+    <Content Include="Image\stock_icons\14x14\x-filter-clear.selected.svg" />
+    <Content Include="Image\stock_icons\14x14\x-filter-clear.svg" />
+    <Resource Include="Image\stock_icons\14x14\x-filter-dropdown%402x.png" />
+    <Resource Include="Image\stock_icons\14x14\x-filter-dropdown.png" />
+    <Content Include="Image\stock_icons\14x14\x-filter-dropdown.svg" />
+    <Resource Include="Image\stock_icons\14x14\x-filter-matching-bookmark%402x.png" />
+    <Resource Include="Image\stock_icons\14x14\x-filter-matching-bookmark.active%402x.png" />
+    <Resource Include="Image\stock_icons\14x14\x-filter-matching-bookmark.active.png" />
+    <Content Include="Image\stock_icons\14x14\x-filter-matching-bookmark.active.svg" />
+    <Resource Include="Image\stock_icons\14x14\x-filter-matching-bookmark.png" />
+    <Resource Include="Image\stock_icons\14x14\x-filter-matching-bookmark.selected%402x.png" />
+    <Resource Include="Image\stock_icons\14x14\x-filter-matching-bookmark.selected.png" />
+    <Content Include="Image\stock_icons\14x14\x-filter-matching-bookmark.selected.svg" />
+    <Content Include="Image\stock_icons\14x14\x-filter-matching-bookmark.svg" />
+    <Resource Include="Image\stock_icons\16x16\edit-find%402x.png" />
+    <Resource Include="Image\stock_icons\16x16\edit-find.png" />
+    <Content Include="Image\stock_icons\16x16\edit-find.svg" />
+    <Resource Include="Image\stock_icons\16x16\go-first%402x.png" />
+    <Resource Include="Image\stock_icons\16x16\go-first.png" />
+    <Content Include="Image\stock_icons\16x16\go-first.svg" />
+    <Resource Include="Image\stock_icons\16x16\go-jump%402x.png" />
+    <Resource Include="Image\stock_icons\16x16\go-jump.png" />
+    <Content Include="Image\stock_icons\16x16\go-jump.svg" />
+    <Resource Include="Image\stock_icons\16x16\go-last%402x.png" />
+    <Resource Include="Image\stock_icons\16x16\go-last.png" />
+    <Content Include="Image\stock_icons\16x16\go-last.svg" />
+    <Resource Include="Image\stock_icons\16x16\go-next%402x.png" />
+    <Resource Include="Image\stock_icons\16x16\go-next.png" />
+    <Content Include="Image\stock_icons\16x16\go-next.svg" />
+    <Resource Include="Image\stock_icons\16x16\go-previous%402x.png" />
+    <Resource Include="Image\stock_icons\16x16\go-previous.png" />
+    <Content Include="Image\stock_icons\16x16\go-previous.svg" />
+    <Resource Include="Image\stock_icons\16x16\x-capture-file-close%402x.png" />
+    <Content Include="Image\stock_icons\16x16\x-capture-file-close%402x.svg" />
+    <Resource Include="Image\stock_icons\16x16\x-capture-file-close.png" />
+    <Content Include="Image\stock_icons\16x16\x-capture-file-close.svg" />
+    <Resource Include="Image\stock_icons\16x16\x-capture-file-reload%402x.png" />
+    <Content Include="Image\stock_icons\16x16\x-capture-file-reload%402x.svg" />
+    <Resource Include="Image\stock_icons\16x16\x-capture-file-reload.png" />
+    <Content Include="Image\stock_icons\16x16\x-capture-file-reload.svg" />
+    <Resource Include="Image\stock_icons\16x16\x-capture-file-save%402x.png" />
+    <Content Include="Image\stock_icons\16x16\x-capture-file-save%402x.svg" />
+    <Resource Include="Image\stock_icons\16x16\x-capture-file-save.png" />
+    <Content Include="Image\stock_icons\16x16\x-capture-file-save.svg" />
+    <Resource Include="Image\stock_icons\16x16\x-capture-options%402x.png" />
+    <Content Include="Image\stock_icons\16x16\x-capture-options-gear.svg" />
+    <Content Include="Image\stock_icons\16x16\x-capture-options-wrench.svg" />
+    <Resource Include="Image\stock_icons\16x16\x-capture-options.png" />
+    <Resource Include="Image\stock_icons\16x16\x-capture-restart%402x.png" />
+    <Content Include="Image\stock_icons\16x16\x-capture-restart-fin.svg" />
+    <Content Include="Image\stock_icons\16x16\x-capture-restart-triangle1.svg" />
+    <Content Include="Image\stock_icons\16x16\x-capture-restart-triangle2.svg" />
+    <Content Include="Image\stock_icons\16x16\x-capture-restart-turn1.svg" />
+    <Content Include="Image\stock_icons\16x16\x-capture-restart-turn2.svg" />
+    <Resource Include="Image\stock_icons\16x16\x-capture-restart.png" />
+    <Resource Include="Image\stock_icons\16x16\x-capture-start%402x.png" />
+    <Resource Include="Image\stock_icons\16x16\x-capture-start.on%402x.png" />
+    <Resource Include="Image\stock_icons\16x16\x-capture-start.on.png" />
+    <Content Include="Image\stock_icons\16x16\x-capture-start.on.svg" />
+    <Resource Include="Image\stock_icons\16x16\x-capture-start.png" />
+    <Content Include="Image\stock_icons\16x16\x-capture-start.svg" />
+    <Resource Include="Image\stock_icons\16x16\x-capture-stop%402x.png" />
+    <Content Include="Image\stock_icons\16x16\x-capture-stop-red.svg" />
+    <Content Include="Image\stock_icons\16x16\x-capture-stop-white.svg" />
+    <Resource Include="Image\stock_icons\16x16\x-capture-stop.png" />
+    <Resource Include="Image\stock_icons\16x16\x-colorize-packets%402x.png" />
+    <Resource Include="Image\stock_icons\16x16\x-colorize-packets.png" />
+    <Content Include="Image\stock_icons\16x16\x-colorize-packets.svg" />
+    <Resource Include="Image\stock_icons\16x16\x-resize-columns%402x.png" />
+    <Resource Include="Image\stock_icons\16x16\x-resize-columns.png" />
+    <Content Include="Image\stock_icons\16x16\x-resize-columns.svg" />
+    <Resource Include="Image\stock_icons\16x16\x-stay-last%402x.png" />
+    <Resource Include="Image\stock_icons\16x16\x-stay-last.png" />
+    <Content Include="Image\stock_icons\16x16\x-stay-last.svg" />
+    <Resource Include="Image\stock_icons\16x16\zoom-in%402x.png" />
+    <Resource Include="Image\stock_icons\16x16\zoom-in.png" />
+    <Content Include="Image\stock_icons\16x16\zoom-in.svg" />
+    <Resource Include="Image\stock_icons\16x16\zoom-original%402x.png" />
+    <Resource Include="Image\stock_icons\16x16\zoom-original.png" />
+    <Content Include="Image\stock_icons\16x16\zoom-original.svg" />
+    <Resource Include="Image\stock_icons\16x16\zoom-out%402x.png" />
+    <Resource Include="Image\stock_icons\16x16\zoom-out.png" />
+    <Content Include="Image\stock_icons\16x16\zoom-out.svg" />
+    <Resource Include="Image\stock_icons\24x14\x-filter-apply%402x.png" />
+    <Resource Include="Image\stock_icons\24x14\x-filter-apply.active%402x.png" />
+    <Resource Include="Image\stock_icons\24x14\x-filter-apply.active.png" />
+    <Content Include="Image\stock_icons\24x14\x-filter-apply.active.svg" />
+    <Resource Include="Image\stock_icons\24x14\x-filter-apply.png" />
+    <Resource Include="Image\stock_icons\24x14\x-filter-apply.selected%402x.png" />
+    <Resource Include="Image\stock_icons\24x14\x-filter-apply.selected.png" />
+    <Content Include="Image\stock_icons\24x14\x-filter-apply.selected.svg" />
+    <Content Include="Image\stock_icons\24x14\x-filter-apply.svg" />
+    <Resource Include="Image\stock_icons\24x24\edit-find%402x.png" />
+    <Resource Include="Image\stock_icons\24x24\edit-find.png" />
+    <Content Include="Image\stock_icons\24x24\edit-find.svg" />
+    <Resource Include="Image\stock_icons\24x24\go-first%402x.png" />
+    <Resource Include="Image\stock_icons\24x24\go-first.png" />
+    <Content Include="Image\stock_icons\24x24\go-first.svg" />
+    <Resource Include="Image\stock_icons\24x24\go-jump%402x.png" />
+    <Resource Include="Image\stock_icons\24x24\go-jump.png" />
+    <Content Include="Image\stock_icons\24x24\go-jump.svg" />
+    <Resource Include="Image\stock_icons\24x24\go-last%402x.png" />
+    <Resource Include="Image\stock_icons\24x24\go-last.png" />
+    <Content Include="Image\stock_icons\24x24\go-last.svg" />
+    <Resource Include="Image\stock_icons\24x24\go-next%402x.png" />
+    <Resource Include="Image\stock_icons\24x24\go-next.png" />
+    <Content Include="Image\stock_icons\24x24\go-next.svg" />
+    <Resource Include="Image\stock_icons\24x24\go-previous%402x.png" />
+    <Resource Include="Image\stock_icons\24x24\go-previous.png" />
+    <Content Include="Image\stock_icons\24x24\go-previous.svg" />
+    <Resource Include="Image\stock_icons\24x24\x-capture-file-close%402x.png" />
+    <Content Include="Image\stock_icons\24x24\x-capture-file-close%402x.svg" />
+    <Resource Include="Image\stock_icons\24x24\x-capture-file-close.png" />
+    <Content Include="Image\stock_icons\24x24\x-capture-file-close.svg" />
+    <Resource Include="Image\stock_icons\24x24\x-capture-file-reload%402x.png" />
+    <Content Include="Image\stock_icons\24x24\x-capture-file-reload%402x.svg" />
+    <Resource Include="Image\stock_icons\24x24\x-capture-file-reload.png" />
+    <Content Include="Image\stock_icons\24x24\x-capture-file-reload.svg" />
+    <Resource Include="Image\stock_icons\24x24\x-capture-file-save%402x.png" />
+    <Content Include="Image\stock_icons\24x24\x-capture-file-save%402x.svg" />
+    <Resource Include="Image\stock_icons\24x24\x-capture-file-save.png" />
+    <Content Include="Image\stock_icons\24x24\x-capture-file-save.svg" />
+    <Resource Include="Image\stock_icons\24x24\x-capture-options%402x.png" />
+    <Content Include="Image\stock_icons\24x24\x-capture-options-gear.svg" />
+    <Content Include="Image\stock_icons\24x24\x-capture-options-wrench.svg" />
+    <Resource Include="Image\stock_icons\24x24\x-capture-options.png" />
+    <Resource Include="Image\stock_icons\24x24\x-capture-restart%402x.png" />
+    <Content Include="Image\stock_icons\24x24\x-capture-restart-fin.svg" />
+    <Content Include="Image\stock_icons\24x24\x-capture-restart-triangle1.svg" />
+    <Content Include="Image\stock_icons\24x24\x-capture-restart-triangle2.svg" />
+    <Content Include="Image\stock_icons\24x24\x-capture-restart-turn1.svg" />
+    <Content Include="Image\stock_icons\24x24\x-capture-restart-turn2.svg" />
+    <Resource Include="Image\stock_icons\24x24\x-capture-restart.png" />
+    <Resource Include="Image\stock_icons\24x24\x-capture-start%402x.png" />
+    <Resource Include="Image\stock_icons\24x24\x-capture-start.on%402x.png" />
+    <Resource Include="Image\stock_icons\24x24\x-capture-start.on.png" />
+    <Content Include="Image\stock_icons\24x24\x-capture-start.on.svg" />
+    <Resource Include="Image\stock_icons\24x24\x-capture-start.png" />
+    <Content Include="Image\stock_icons\24x24\x-capture-start.svg" />
+    <Resource Include="Image\stock_icons\24x24\x-capture-stop%402x.png" />
+    <Content Include="Image\stock_icons\24x24\x-capture-stop-red.svg" />
+    <Content Include="Image\stock_icons\24x24\x-capture-stop-white.svg" />
+    <Resource Include="Image\stock_icons\24x24\x-capture-stop.png" />
+    <Resource Include="Image\stock_icons\24x24\x-colorize-packets%402x.png" />
+    <Resource Include="Image\stock_icons\24x24\x-colorize-packets.png" />
+    <Content Include="Image\stock_icons\24x24\x-colorize-packets.svg" />
+    <Resource Include="Image\stock_icons\24x24\x-resize-columns%402x.png" />
+    <Content Include="Image\stock_icons\24x24\x-resize-columns-motion.svg" />
+    <Resource Include="Image\stock_icons\24x24\x-resize-columns.png" />
+    <Content Include="Image\stock_icons\24x24\x-resize-columns.svg" />
+    <Resource Include="Image\stock_icons\24x24\x-stay-last%402x.png" />
+    <Resource Include="Image\stock_icons\24x24\x-stay-last.png" />
+    <Content Include="Image\stock_icons\24x24\x-stay-last.svg" />
+    <Resource Include="Image\stock_icons\24x24\zoom-in%402x.png" />
+    <Resource Include="Image\stock_icons\24x24\zoom-in.png" />
+    <Content Include="Image\stock_icons\24x24\zoom-in.svg" />
+    <Resource Include="Image\stock_icons\24x24\zoom-original%402x.png" />
+    <Resource Include="Image\stock_icons\24x24\zoom-original.png" />
+    <Content Include="Image\stock_icons\24x24\zoom-original.svg" />
+    <Resource Include="Image\stock_icons\24x24\zoom-out%402x.png" />
+    <Resource Include="Image\stock_icons\24x24\zoom-out.png" />
+    <Content Include="Image\stock_icons\24x24\zoom-out.svg" />
+    <Content Include="Image\stock_icons\svg\x-filter-apply.svg" />
+    <Content Include="Image\stock_icons\svg\x-filter-bookmark.svg" />
+    <Content Include="Image\stock_icons\svg\x-filter-clear.svg" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <SsdtUnitTestVersion>3.1</SsdtUnitTestVersion>
+  </PropertyGroup>
+  <Import Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.Sql.UnitTesting.targets" Condition="$(VisualStudioVersion) != '15.0' And '$(SQLDBExtensionsRefPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.Sql.UnitTesting.targets" Condition="$(VisualStudioVersion) != '15.0' And '$(SQLDBExtensionsRefPath)' == ''" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    if not exist "$(TargetDir)x86" md "$(TargetDir)x86"
+    xcopy /s /y "$(SolutionDir)packages\Microsoft.SqlServer.Compact.4.0.8876.1\NativeBinaries\x86\*.*" "$(TargetDir)x86"
+    if not exist "$(TargetDir)amd64" md "$(TargetDir)amd64"
+    xcopy /s /y "$(SolutionDir)packages\Microsoft.SqlServer.Compact.4.0.8876.1\NativeBinaries\amd64\*.*" "$(TargetDir)amd64"</PostBuildEvent>
+  </PropertyGroup>
+</Project>

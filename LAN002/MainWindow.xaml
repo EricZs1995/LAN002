@@ -1,0 +1,240 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LAN002"
+         xmlns:c1="http://schemas.componentone.com/winfx/2006/xaml"
+         x:Class="LAN002.MainWindow"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        Title="局域网数据检测系统" Height="800" Width="1024" Icon="1.ico"
+    Closing="Window_Closing" Closed="Window_Closed">
+    <DockPanel x:Name="rootPanel">
+        <!--菜单栏-->
+        <Menu DockPanel.Dock="Top" x:Name="menuBar" Padding="2" Background="White">
+            <MenuItem Header="文件(_F)">
+                <!--<MenuItem x:Name="saveSerialDataMenuItem" Header="保存(_S)"  Visibility="Collapsed"/>
+                <MenuItem x:Name="saveConfigMenuItem" Header="保存配置" />
+                <MenuItem x:Name="loadConfigMenuItem" Header="加载配置(_L)"  Visibility="Collapsed"/>
+                <MenuItem x:Name="exitMenuItem" Header="退出"/>-->
+            </MenuItem>
+
+            <MenuItem Header="设置(_S)">
+                <!--<MenuItem Header="发送追加">
+                    <RadioButton x:Name="appendNoneRadioButton" Tag="none" Content="无" />
+                    <RadioButton x:Name="appendReturnRadioButton" Tag="return" Content="回车(\r)" />
+                    <RadioButton x:Name="appednNewLineRadioButton" Tag="newline" Content="新行(\n)" IsChecked="True" />
+                    <RadioButton x:Name="appendReturnNewLineRadioButton" Tag="retnewline" Content="回车新行(\r\n)"/>
+                </MenuItem>-->
+            </MenuItem>
+
+            <MenuItem Header="视图(_V)">
+                <!--<MenuItem x:Name="serialSettingViewMenuItem" Header="串口配置面板" IsChecked="True" />-->
+                <!--<MenuItem x:Name="autoSendDataSettingViewMenuItem" Header="自动发送设置面板" IsChecked="True" />
+                <MenuItem x:Name="serialCommunicationSettingViewMenuItem" Header="通信设置面板" IsChecked="True" />
+                <MenuItem x:Name="compactViewMenuItem" Header="简洁视图" IsChecked="False"  Visibility="Visible"/>-->
+            </MenuItem>
+            <MenuItem Header="捕获(_C)">
+                <MenuItem x:Name="optionsCaptureMenuItem" Header="设置(O)" IsChecked="false" Padding="2">
+                    <MenuItem.Icon>
+                        <Image Source="/Lan002;component/Image/stock_icons/16x16/x-capture-options.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="startCaptureMenuItem" Header="开始(S)" IsChecked="false" Padding="2" Click="startCaptureMenuItem_Click" >
+                    <MenuItem.Icon>
+                        <Image Source="/Lan002;component/Image/stock_icons/16x16/x-capture-start.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="stopCaptureMenuItem" Header="停止(T)" IsChecked="false" Padding="2" Click="stopCaptureMenuItem_Click">
+                    <MenuItem.Icon>
+                        <Image Source="/Lan002;component/Image/stock_icons/16x16/x-capture-stop.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="restartCaptureMenuItem" Header="重新开始(R)" IsChecked="false" Padding="2" Click="restartCaptureMenuItem_Click">
+                    <MenuItem.Icon>
+                        <Image Source="/Lan002;component/Image/stock_icons/16x16/x-capture-restart.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="captureFilterMenuItem" Header="捕获过滤器(F)..." Click="captureFilterMenuItem_Click" Padding="2"/>
+                <MenuItem x:Name="captureInterfacesMenuItem" Header="刷新接口列表" Padding="2"/>
+
+            </MenuItem>
+
+            <MenuItem Header="统计(_A)">
+                <MenuItem  Header="I/O图表"  Padding="2" Click="statis_Click"/>
+                <MenuItem  Header="协议分级(P)"  Padding="2" Click="statis_Click"/>
+                <MenuItem  Header="对话"  Padding="2" Click="statis_Click"/>
+                <MenuItem  Header="端点"  Padding="2" Click="statis_Click"/>
+                <MenuItem  Header="分组长度"  Padding="2" Click="statis_Click"/>
+                <MenuItem  Header="异常"  Padding="2" Click="statis_Click"/>
+            </MenuItem>
+
+            <MenuItem Header="日志(_L)">
+                <MenuItem x:Name="AttackLog" Header="攻击日志" Click="statis_Click" Padding="2"/>
+                <MenuItem x:Name="CaptureLog" Header="捕包日志" Click="statis_Click" Padding="2"/>
+            </MenuItem>
+
+            <MenuItem Header="帮助(_H)">
+                <MenuItem x:Name="aboutMenuItem" Header="关于(_A)" />
+                <MenuItem x:Name="helpMenuItem" Header="软件文档(_D)" />
+            </MenuItem>
+        </Menu>
+        <!--<ToolBar DockPanel.Dock="Top">
+            <TabItem Name="sda" FontSize="18"></TabItem>
+        </ToolBar>-->
+        <ToolBar Background="#EAEAEA" DockPanel.Dock="Top" ToolBarTray.IsLocked="True" Margin="1">
+            <Button x:Name="startCaptureToobar" Margin="1" Click="startCaptureMenuItem_Click" >
+                <Image Source="/Lan002;component/Image/stock_icons/16x16/x-capture-start.png" Stretch="None"/>
+            </Button>
+            <Button x:Name="stopCaptureToobar" Margin="1"  Click="stopCaptureMenuItem_Click">
+                <Image Source="/Lan002;component/Image/stock_icons/16x16/x-capture-stop.png" Stretch="None"/>
+            </Button>
+            <Button x:Name="restartCaptureToobar" Margin="1" Click="restartCaptureMenuItem_Click">
+                <Image Source="/Lan002;component/Image/stock_icons/16x16/x-capture-restart.png" Stretch="None"/>
+            </Button>
+            <Button x:Name="optionsCaptureToobar" Margin="1">
+                <Image Source="/Lan002;component/Image/stock_icons/16x16/x-capture-options.png" Stretch="None"/>
+            </Button>
+            <TextBox Background="#C4C4C4" Width="3" Margin="1" />
+            <Button x:Name="savefileCaptureToobar" Margin="0,1,0,0" VerticalAlignment="Top" Click="savefileCaptureToobar_Click">
+                <Image Source="/Lan002;component/Image/stock_icons/16x16/x-capture-file-save.png" Stretch="None"/>
+            </Button>
+            <Button x:Name="closefileCaptureToobar" Margin="1">
+                <Image Source="/Lan002;component/Image/stock_icons/16x16/x-capture-file-close.png" Stretch="None"/>
+            </Button>
+            <Button x:Name="reloadfileCaptureToobar" Margin="1">
+                <Image Source="/Lan002;component/Image/stock_icons/16x16/x-capture-file-reload.png" Stretch="None"/>
+            </Button>
+
+        </ToolBar>
+        <ToolBar Background="#EAEAEA" DockPanel.Dock="Top" ToolBarTray.IsLocked="True"  >
+            <Label Content="Filter : "/>
+            <TextBox Name="filter_tb" TextChanged="filter_tb_TextChanged" Background="LightGreen" Width="900" Height="20" Margin="0" >
+
+            </TextBox>
+            <Button x:Name="filter_delete_tb" Click="filter_delete_tb_Click" Width="20" Height="20" Margin="2,0,2,0" >
+                <Button.Background>
+                    <ImageBrush ImageSource="/Lan002;component/Image/stock_icons/14x14/x-filter-clear@2x.png" Stretch="Fill"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="go_set_tb" Click="go_set_tb_Click"  Width="20" Height="20" Margin="2,0,2,0" >
+                <Button.Background>
+                    <ImageBrush ImageSource="/Lan002;component/Image/stock_icons/16x16/go-next@2x.png" Stretch="Fill"/>
+                </Button.Background>
+            </Button>
+        </ToolBar>
+        <!--状态栏-->
+        <StatusBar DockPanel.Dock="Bottom" x:Name="statusBar" Background="#FF007ACC" Padding="2">
+            <StatusBarItem HorizontalAlignment="Left">
+                <TextBlock x:Name="statusInfoTextBlock" Foreground="White"><Run Text="欢迎使用局域网数据检测系统！"/></TextBlock>
+            </StatusBarItem>
+            <StatusBarItem>
+                <ProgressBar x:Name="progressBar" Foreground="White" BorderBrush="White" Background="{Binding Background, ElementName=statusBar}" Visibility="Collapsed" Width="150" Height="10" Value="10" SmallChange="1" IsIndeterminate="True" Margin="10,0,0,0"/>
+            </StatusBarItem>
+            <StatusBarItem Margin="0,0,0,0" x:Name="dataRecvStatusBarItem" Visibility="Collapsed">
+                <StackPanel Orientation="Horizontal">
+                    <Ellipse Height="5" Width="5" Fill="White" Margin="0,0,5,0"/>
+                    <Ellipse Height="5" Width="5" Fill="White" Margin="0,0,5,0"/>
+                    <Ellipse Height="5" Width="5" Fill="White" Margin="0,0,5,0"/>
+                    <Ellipse Height="5" Width="5" Fill="White" Margin="0,0,5,0"/>
+                    <Ellipse Height="5" Width="5" Fill="White" Margin="0,0,5,0"/>
+                    <Ellipse Height="5" Width="5" Fill="White"/>
+                </StackPanel>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <TextBlock x:Name="timeDateTextBlock" Foreground="White"/>
+            </StatusBarItem>
+        </StatusBar>
+        <DockPanel x:Name="container">
+
+            <GroupBox Margin="5" Header="分组列表" MinHeight="300" MaxHeight="300" DockPanel.Dock="Top" BorderThickness="1" BorderBrush="#FF7199E0">
+
+                <c1:C1DataGrid Name="packetList" 
+                               SelectionChanged="packetList_SelectionChanged"
+                               BorderBrush="Transparent" 
+                               HeaderBackground="WhiteSmoke" 
+                               Padding="2"
+                               CanUserFreezeColumns="None"
+                               CanUserAddRows="False"
+                               CanUserEditRows="False"
+                               AutoGenerateColumns="True"
+                               SelectionMode="SingleRow"
+                               ColumnHeaderClickAction="Sort"
+                               GridLinesVisibility="All"
+                               RowHeight="25"
+                               AlternatingRowBackground="White"
+                               >
+                    <c1:C1RowIndexHeaderBehavior.RowIndexHeaderBehavior>
+                        <c1:C1RowIndexHeaderBehavior InitialIndex="1"/>
+                    </c1:C1RowIndexHeaderBehavior.RowIndexHeaderBehavior>
+                </c1:C1DataGrid>
+            </GroupBox>
+
+            <DockPanel DockPanel.Dock="Bottom">
+                <GroupBox  Margin="5" Header="分组详情" BorderThickness="1" BorderBrush="#FF7199E0" Padding="2" Width="519">
+                    <TreeView x:Name="treeviewPacket" BorderBrush="Transparent" 
+                          HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10" >
+                        <!--<TreeViewItem Name="frame" Header="Frame"></TreeViewItem>
+                    <TreeViewItem Name="ethernet" Header="Ethernet II, Src: "></TreeViewItem>
+                    <TreeViewItem Name="internet" Header="Internet Protocol Version"></TreeViewItem>
+                    <TreeViewItem Name="transmission" Header="Transmission Control Protocol, Src Port:"></TreeViewItem>-->
+                    </TreeView>
+                </GroupBox>
+
+                <GroupBox Header="统计信息" BorderThickness="1" BorderBrush="#FF7199E0" Padding="2" Margin="5">
+                    <Grid>
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <Label  Content="总数 :"  HorizontalContentAlignment="Right" Width="62"/>
+                                <Label  x:Name="total" Content="0%" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <Label  Content="TCP :"  HorizontalContentAlignment="Right" Width="62"/>
+                                <Label x:Name="l_tcp" Content="0"  Width="40"/>
+                                <ProgressBar x:Name="pb_tcp" Minimum="0" Maximum="100" Height="20"  Value="0" Width="280" />
+                                <Label x:Name="p_tcp" Content="0%"  Width="40"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <Label  Content="UDP :"  HorizontalContentAlignment="Right" Width="62"/>
+                                <Label x:Name="l_udp" Content="0"  Width="40"/>
+                                <ProgressBar x:Name="pb_udp" Minimum="0" Maximum="100" Height="20"  Value="0" Width="280" />
+                                <Label x:Name="p_udp" Content="0%"  Width="40"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <Label  Content="ICMP :"  HorizontalContentAlignment="Right" Width="62"/>
+                                <Label x:Name="l_icmp" Content="0"  Width="40"/>
+                                <ProgressBar x:Name="pb_icmp" Minimum="0" Maximum="100" Height="20"  Value="0" Width="280" />
+                                <Label x:Name="p_icmp" Content="0%"  Width="40"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <Label  Content="IGMP :"  HorizontalContentAlignment="Right" Width="62"/>
+                                <Label x:Name="l_igmp" Content="0"  Width="40"/>
+                                <ProgressBar x:Name="pb_igmp" Minimum="0" Maximum="100" Height="20"  Value="0" Width="280" />
+                                <Label x:Name="p_igmp" Content="0%"  Width="40"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <Label  Content="ARP :"  HorizontalContentAlignment="Right" Width="62"/>
+                                <Label x:Name="l_arp" Content="0"  Width="40"/>
+                                <ProgressBar x:Name="pb_arp" Minimum="0" Maximum="100" Height="20"  Value="0" Width="280" />
+                                <Label x:Name="p_arp" Content="0%"  Width="40"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <Label  Content="Other :"  HorizontalContentAlignment="Right" Width="62"/>
+                                <Label x:Name="l_other" Content="0"  Width="40"/>
+                                <ProgressBar x:Name="pb_other" Minimum="0" Maximum="100" Height="20"  Value="0" Width="280" />
+                                <Label x:Name="p_other" Content="0%"  Width="40"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+
+
+                </GroupBox>
+            </DockPanel>
+
+            <!--<StackPanel Name="framedata" Height="40" DockPanel.Dock="Bottom">
+                
+            </StackPanel>-->
+        </DockPanel>
+
+    </DockPanel>
+</Window>

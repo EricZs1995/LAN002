@@ -1,0 +1,123 @@
+﻿<Window x:Class="LAN002.Windows.Init.FilterSettingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LAN002.Windows.Init"
+        mc:Ignorable="d"  Icon="/1.ico"
+        Title="局域网数据检测与分析系统 · 过滤器设置" Height="510.4" Width="610">
+    <DockPanel Background="#EAEAEA" Margin="0,0,-0.4,-29.2" Height="502" VerticalAlignment="Top">
+        <DockPanel DockPanel.Dock="Top" Height="371" Margin="0,0,0,0">
+            <StackPanel DockPanel.Dock="Left" Width="300" Margin="5,5,5,10.2">
+                <Label Content="字段名称"/>
+                <TreeView  Name="filter_list" Height="325"  
+                           SelectedItemChanged="filter_list_SelectedItemChanged" Margin="0,0,-0.2,0">
+                    <TreeViewItem Header="ARP · Addree Resolution Protocol">
+                        <!--<TreeViewItem Header="arp.dst.hw · Target hardware address"/>
+                        <TreeViewItem Header="arp.dst.hw_mac · Target MAC address"/>
+                        <TreeViewItem Header="arp.dst.proto_ipv4 · Target IP address"/>
+                        <TreeViewItem Header="arp.src.hw · Sender hardware address"/>
+                        <TreeViewItem Header="arp.src.hw_mac · Sender MAC address"/>
+                        <TreeViewItem Header="arp.src.proto_ipv4 · Sender IP address"/>-->
+                    </TreeViewItem>
+
+                    <TreeViewItem Header="Ethernet · Ethernet">
+
+                        <TreeViewItem Header="ether host · Source or Destination Address"/>
+                        <TreeViewItem Header="ether src · Source Address"/>
+                        <TreeViewItem Header="ether dst · Destination Address"/>
+                        <TreeViewItem Header="ether proto · Protocol"/>
+                        <TreeViewItem Header="ether broadcast · Broadcast"/>
+                        <TreeViewItem Header="ether multicast · Multicast"/>
+                        <!--wiresahrk zhong zhuyi-->
+                    </TreeViewItem>
+                    <TreeViewItem Header="ICMP · Internet Control Message Protocol"/>
+                    <TreeViewItem Header="ICMP6 · Internet Control Message Protocol v6"/>
+                    <TreeViewItem Header="IGMP · Internet Group Management Protocol"/>
+                    <TreeViewItem Header="IP · Internet Protocol Version 4">
+                        <TreeViewItem Header="ip host · Source or Destination Address"/>
+                        <TreeViewItem Header="ip src · Source Address"/>
+                        <TreeViewItem Header="ip dst · Destination Address"/>
+                        <TreeViewItem Header="ip broadcast · Broadcast"/>
+                        <TreeViewItem Header="ip multicast · Multicast"/>
+                        <TreeViewItem Header="ip proto · Protocol"/>
+                    </TreeViewItem>
+                    <TreeViewItem Header="IP6 · Internet Protocol Version 6">
+                        <TreeViewItem Header="ip6 host · Source or Destination Address"/>
+                        <TreeViewItem Header="ip6 src · Source Address"/>
+                        <TreeViewItem Header="ip6 dst · Destination Address"/>
+                        <TreeViewItem Header="ip6 broadcast · Broadcast"/>
+                        <TreeViewItem Header="ip6 multicast · Multicast"/>
+                        <TreeViewItem Header="ip6 proto · Protocol"/>
+                    </TreeViewItem>
+                    <TreeViewItem Header="TCP · Transmission Control Protocol">
+                        <TreeViewItem Header="tcp port · Source or Destination Port"/>
+                        <TreeViewItem Header="tcp src port · Source Port"/>
+                        <TreeViewItem Header="tcp dst port · Destination Port"/>
+                        <TreeViewItem Header="tcp flags urg · Urgent"/>
+                        <TreeViewItem Header="tcp flags ack · Acknowledgment"/>
+                        <TreeViewItem Header="tcp flags push · Push"/>
+                        <TreeViewItem Header="tcp flags rst · Reset"/>
+                        <TreeViewItem Header="tcp flags syn · Synchronous"/>
+                        <TreeViewItem Header="tcp flags fin · Finish"/>
+                    </TreeViewItem>
+                    <TreeViewItem Header="UDP · User Datagram Protocol">
+                        <TreeViewItem Header="udp port · Source or Destination Port"/>
+                        <TreeViewItem Header="udp src port · Source Port"/>
+                        <TreeViewItem Header="udp dst port · Destination Port"/>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Less · Packet Length Less Than or Equal"/>
+                    <TreeViewItem Header="Greater · Packet Length Greater Than or Equal"/>
+                </TreeView>
+
+            </StackPanel>
+
+            <StackPanel DockPanel.Dock="Right" Margin="5,5,5,9.6">
+                <Label Content="关系"/>
+                <ListView Name="rel_list" SelectionChanged="rel_list_SelectionChanged" Height="117">
+                    <ListViewItem Content="and"/>
+                    <ListViewItem Content="or"/>
+                    <ListViewItem Content="not"/>
+                    <ListViewItem Content="&amp;&amp;"/>
+                    <ListViewItem Content="||"/>
+                    <ListViewItem Content="!"/>
+                    <ListViewItem Content="=="/>
+                    <ListViewItem Content="!="/>
+                    <ListViewItem Content="&gt;"/>
+                    <ListViewItem Content="&lt;"/>
+                    <ListViewItem Content="&gt;="/>
+                    <ListViewItem Content="&lt;="/>
+                </ListView>
+
+                <Label Content="值" Margin="5,10,5,0"/>
+                <TextBox Name="rel_value" TextChanged="rel_value_TextChanged" 
+                         IsKeyboardFocusedChanged="rel_value_IsKeyboardFocusedChanged"
+                         IsKeyboardFocusWithinChanged="rel_value_IsKeyboardFocusWithinChanged" 
+                         Margin="5,0,5,0"/>
+                <Label Content="预定义的值" Margin="5,0,5,0"/>
+                <ListView Name="rel_value_pre"  Margin="5,0,5,5" Height="131">
+
+                </ListView>
+            </StackPanel>
+        </DockPanel>
+        <StackPanel DockPanel.Dock="Bottom" Margin="5,0,5,5" Height="127" >
+            <Label Content="过滤条件"/>
+            <StackPanel Orientation="Horizontal" Margin="5,0,5,0" Height="25">
+                <TextBox Name="filter_cont" Background="LightGreen" TextChanged="filter_cont_TextChanged" Height="20" Width="548" Margin="0,2,0,2.8"></TextBox>
+                <Button x:Name="filter_delete" Click="filter_delete_Click" Width="25" Height="25" >
+                    <Button.Background>
+                        <ImageBrush ImageSource="/Lan002;component/Image/stock_icons/14x14/x-filter-clear@2x.png" Stretch="Fill"/>
+                    </Button.Background>
+                </Button>
+            </StackPanel>
+
+            <Label Content="点击确定插入此过滤器" FontStyle="Oblique" FontSize="10"/>
+            <StackPanel Orientation="Horizontal" Height="27" Margin="383,0,0,0">
+                <Button x:Name="filter_ok" Content="OK" Margin="0,0,0,0.2" Width="80" Height="20" Click="filter_ok_Click" />
+                <Button x:Name="filter_cancel" Content="Cancel" Margin="30,0,0,0.2" Width="80" Height="20" Click="filter_cancel_Click" />
+            </StackPanel>
+
+
+        </StackPanel>
+    </DockPanel>
+</Window>
